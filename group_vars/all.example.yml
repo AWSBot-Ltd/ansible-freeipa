@@ -1,0 +1,6 @@
+server_alias: ipa
+server_hostname: ipa.example.com
+domain: example.com
+realm: EXAMPLE.COM
+principal_user: admin
+principal_user_password: ASecretPasswor

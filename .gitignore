@@ -1,0 +1,4 @@
+*pem
+*.retry
+group_vars/all.yml
+hosts

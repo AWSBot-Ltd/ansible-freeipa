@@ -1,0 +1,59 @@
+- name: Create the sources for the freeipa client
+  template: 
+    src: roles/client/template/freeipa.list.j2
+    dest: /etc/apt/sources.list.d/freeipa.list
+    owner: root
+    group: root
+    mode: 0644
+- name: Create folder for storing certificate database
+  file: 
+    path: /etc/pki/nssdb
+    state: directory
+- name: Create folder for ipa
+  file: 
+    path: /var/run/ipa
+    state: directory
+- name: Install prequistes packages
+  apt:
+    name: software-properties-common
+    state: present
+- name: install the package signature verification key
+  apt_key: 
+    url: http://apt.numeezy.fr/numeezy.asc
+    state: present
+- name: Set server host name to a fully qualified domain name
+  template:
+    src: roles/client/template/hostname.j2
+    dest: /etc/hostname
+    owner: root
+    group: root
+    mode: 0644
+- name: Install vim
+  apt:
+    update_cache: yes
+    name: vim
+    state: present
+- name: Install nscd
+  apt: 
+    update_cache: yes
+    name: nscd
+    state: present
+- name: Install freeipa client
+  apt: 
+    update_cache: yes
+    name: freeipa-client
+    state: present
+- name: Change SSH to allow password authentication
+  replace: 
+    dest: /etc/ssh/sshd_config
+    regexp: 'PasswordAuthentication no'
+    replace: 'PasswordAuthentication yes'
+    backup: yes
+- name: Run the ipa-client-install command
+  ignore_errors: yes
+  command: ipa-client-install -U --domain={{ domain }} --server={{ server_alias }}.{{ domain }} --realm={{ realm }} --password={{ principal_user_password }} --principal={{ principal_user }} --mkhomedir --no-dns-sshfp --hostname={{ inventory_hostname }} --no-ntp
+- name: restart server
+  command: "shutdown -r now"
+  poll: 0
+  ignore_errors: yes
+  

@@ -1,0 +1,13 @@
+- hosts: servers
+  become: yes
+  become_method: sudo
+  user: fedora
+  roles:
+    - server
+
+- hosts: clients
+  become: yes
+  become_method: sudo
+  user: admin
+  roles:
+    - client
