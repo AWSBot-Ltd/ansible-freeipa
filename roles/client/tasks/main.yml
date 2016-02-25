@@ -49,11 +49,16 @@
     regexp: 'PasswordAuthentication no'
     replace: 'PasswordAuthentication yes'
     backup: yes
+- name: Test for pam_mkhomedir.so
+  shell: grep "pam_mkhomedir.so" /etc/pam.d/common-session
+  register: test_grep
+  ignore_errors: yes
+- name: Enable auto creation of LDAP user folders
+  lineinfile: 
+    dest: /etc/pam.d/common-session
+    line: "session required pam_mkhomedir.so"
+  when: test_grep.stdout == ""
 - name: Run the ipa-client-install command
   ignore_errors: yes
   command: ipa-client-install -U --domain={{ domain }} --server={{ server_alias }}.{{ domain }} --realm={{ realm }} --password={{ principal_user_password }} --principal={{ principal_user }} --mkhomedir --no-dns-sshfp --hostname={{ inventory_hostname }} --no-ntp
-- name: restart server
-  command: "shutdown -r now"
-  poll: 0
-  ignore_errors: yes
   
