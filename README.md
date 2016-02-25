@@ -11,6 +11,17 @@ The installation of FreeIPA is relatively simple, as FreeIPA supports Fedora out
 * Copy the hosts.example file and alter the values for the servers and clients with DNS names for the respective instances.
 * Copy the group_vars/all.example.yml and fill in the relavent values for the 
 
+Then execute the command
+´´´
+  ansible-playbook freeipa.yml
+´´´
+
+## Known Bugs
+ * Joining a server to the domain raises an error about NTP (even though its specified not to) and uploading SSH keys. The server will still be joined to the domain and after a reboot can be logged into.
+ * The server requires a reboot, this also causes an error in Ansible.
+
+Both these errors have been specified to be ignored by Ansible, until a time when they can be properly fixed.
+
 ## References
 * http://pakjiddat.com/installing-freeipa-client-debian
 * http://www.freeipa.org/page/Quick_Start_Guide
