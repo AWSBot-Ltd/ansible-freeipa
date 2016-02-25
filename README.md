@@ -4,7 +4,7 @@ An Ansible playbook for configuring a FreeIPA server(s) and clients.
 * Expects Fedora Release 23/Debian 8 (Jessie)
 
 ## Getting started
-This playbook is made specically for a client (Debian 8), server (Fedora 23) architecture. 
+This playbook is made specifically for a client (Debian 8), server (Fedora 23) architecture. 
 
 The installation of FreeIPA is relatively simple, as FreeIPA supports Fedora out of the box. However debian is not supported, and so has been cobbled together from [snippets](http://pakjiddat.com/installing-freeipa-client-debian) on the internet, and general trial and error.
 
