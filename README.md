@@ -12,9 +12,9 @@ The installation of FreeIPA is relatively simple, as FreeIPA supports Fedora out
 * Copy the group_vars/all.example.yml and fill in the relavent values for the variables.
 
 Then execute the command
-´´´
+```
   ansible-playbook freeipa.yml
-´´´
+```
 Once complete the server will need to be rebooted (see known bugs).
 
 ## Known Bugs
