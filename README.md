@@ -26,3 +26,4 @@ Both these errors have been specified to be ignored by Ansible, until a time whe
 ## References
 * http://pakjiddat.com/installing-freeipa-client-debian
 * http://www.freeipa.org/page/Quick_Start_Guide
+* https://docs.fedoraproject.org/en-US/Fedora/15/html/FreeIPA_Guide/linux-manual.html
