@@ -1,11 +1,11 @@
-- name: Create the sources for the freeipa client
+- name: Create the sources for the FreeIPA client
   template: 
     src: roles/client/template/freeipa.list.j2
     dest: /etc/apt/sources.list.d/freeipa.list
     owner: root
     group: root
     mode: 0644
-- name: Create folder for storing certificate database
+- name: Create a directory for storing the certificate database
   file: 
     path: /etc/pki/nssdb
     state: directory
@@ -13,15 +13,15 @@
   file: 
     path: /var/run/ipa
     state: directory
-- name: Install prequistes packages
+- name: Install prerequistes packages
   apt:
     name: software-properties-common
     state: present
-- name: install the package signature verification key
+- name: Install the package signature verification key
   apt_key: 
     url: http://apt.numeezy.fr/numeezy.asc
     state: present
-- name: Set server host name to a fully qualified domain name
+- name: Set the FreeIPA server hostname to a fully qualified domain name
   template:
     src: roles/client/template/hostname.j2
     dest: /etc/hostname
@@ -38,7 +38,7 @@
     update_cache: yes
     name: nscd
     state: present
-- name: Install freeipa client
+- name: Install FreeIPA client
   apt: 
     update_cache: yes
     name: freeipa-client
@@ -61,4 +61,3 @@
 - name: Run the ipa-client-install command
   ignore_errors: yes
   command: ipa-client-install -U --domain={{ domain }} --server={{ server_alias }}.{{ domain }} --realm={{ realm }} --password={{ principal_user_password }} --principal={{ principal_user }} --mkhomedir --no-dns-sshfp --hostname={{ inventory_hostname }} --no-ntp
-  
