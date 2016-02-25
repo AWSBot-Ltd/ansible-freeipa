@@ -1,5 +1,5 @@
 # ansible-freeipa
-An Ansible playbook for configuring a FreeIPA server(s) and clients.
+An Ansible playbook for configuring FreeIPA server(s) and clients.
 * Requires Ansible 2.1.0
 * Expects Fedora Release 23/Debian 8 (Jessie)
 
