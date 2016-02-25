@@ -15,10 +15,11 @@ Then execute the command
 ´´´
   ansible-playbook freeipa.yml
 ´´´
+Once complete the server will need to be rebooted (see known bugs).
 
 ## Known Bugs
  * Joining a server to the domain raises an error about NTP (even though its specified not to) and uploading SSH keys. The server will still be joined to the domain and after a reboot can be logged into.
- * The server requires a reboot, this also causes an error in Ansible.
+ * The server requires a reboot, this also causes an error in Ansible - so for now has been removed from the playbook.
 
 Both these errors have been specified to be ignored by Ansible, until a time when they can be properly fixed.
 
