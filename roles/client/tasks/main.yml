@@ -49,6 +49,13 @@
     regexp: 'PasswordAuthentication no'
     replace: 'PasswordAuthentication yes'
     backup: yes
+- name: Allow members of the admin groups to use sudo
+  template:
+    src: roles/client/template/80-freeipa-admins.j2
+    dest: /etc/sudoers.d/80-freeipa-admins
+    owner: root
+    group: root
+    mode: 0660
 - name: Test for pam_mkhomedir.so
   shell: grep "pam_mkhomedir.so" /etc/pam.d/common-session
   register: test_grep
