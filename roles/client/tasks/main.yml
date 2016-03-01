@@ -21,18 +21,6 @@
   apt_key: 
     url: http://apt.numeezy.fr/numeezy.asc
     state: present
-- name: Set the FreeIPA server hostname to a fully qualified domain name
-  template:
-    src: roles/client/template/hostname.j2
-    dest: /etc/hostname
-    owner: root
-    group: root
-    mode: 0644
-- name: Install vim
-  apt:
-    update_cache: yes
-    name: vim
-    state: present
 - name: Install nscd
   apt: 
     update_cache: yes
@@ -43,12 +31,6 @@
     update_cache: yes
     name: freeipa-client
     state: present
-- name: Change SSH to allow password authentication
-  replace: 
-    dest: /etc/ssh/sshd_config
-    regexp: 'PasswordAuthentication no'
-    replace: 'PasswordAuthentication yes'
-    backup: yes
 - name: Allow members of the admin groups to use sudo
   template:
     src: roles/client/template/80-freeipa-admins.j2
@@ -67,4 +49,4 @@
   when: test_grep.stdout == ""
 - name: Run the ipa-client-install command
   ignore_errors: yes
-  command: ipa-client-install -U --domain={{ domain }} --server={{ server_alias }}.{{ domain }} --realm={{ realm }} --password={{ principal_user_password }} --principal={{ principal_user }} --mkhomedir --no-dns-sshfp --hostname={{ inventory_hostname }} --no-ntp
+  command: ipa-client-install -U --domain={{ domain }} --server={{ server_hostname }} --realm={{ realm }} --password={{ principal_user_password }} --principal={{ principal_user }} --mkhomedir --no-dns-sshfp --hostname={{ inventory_hostname }} --no-ntp
