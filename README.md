@@ -1,6 +1,6 @@
 # ansible-freeipa
 An Ansible playbook for configuring IPA server(s) and clients.
-* Requires Ansible 2.1.0
+* Requires Ansible 1.9.4
 * Expects RHEL 7 (server)/Debian 8 (client)
 
 ## Getting started
