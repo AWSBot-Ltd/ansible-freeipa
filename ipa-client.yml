@@ -2,7 +2,3 @@
   user: root
   roles:
     - client
-- hosts: servers
-  user: root
-  roles:
-    - server
