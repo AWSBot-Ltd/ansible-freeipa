@@ -1,21 +1,30 @@
 # ansible-freeipa
-An Ansible playbook for configuring FreeIPA server(s) and clients.
+An Ansible playbook for configuring IPA server(s) and clients.
 * Requires Ansible 2.1.0
-* Expects Fedora Release 23/Debian 8 (Jessie)
+* Expects RHEL 7 (server)/Debian 8 (client)
 
 ## Getting started
-This playbook is made specifically for a client (Debian 8), server (Fedora 23) architecture. 
+This playbook is made specifically for a client (Debian 8), server (RHEL 7) architecture. 
 
-The installation of FreeIPA is relatively simple, as FreeIPA supports Fedora out of the box. However debian is not supported, and so has been cobbled together from [snippets](http://pakjiddat.com/installing-freeipa-client-debian) on the internet, and general trial and error.
+The installation of IPA is relatively simple, as FreeIPA supports Fedora out of the box. However debian is not supported, and so has been cobbled together from [snippets](http://pakjiddat.com/installing-freeipa-client-debian) on the internet, and general trial and error.
 
 * Copy the hosts.example file and alter the values for the servers and clients with DNS names for the respective instances.
 * Copy the group_vars/all.example.yml and fill in the relavent values for the variables.
 
 Then execute the command
 ```
-  ansible-playbook freeipa.yml
+  ansible-playbook ipa-server.yml
 ```
-Once complete the server will need to be rebooted (see known bugs).
+or
+```
+  ansible-playbook ipa-client.yml
+```
+There is also a Makefile which can be used on a localhost (providing the group_vars have been set),
+```
+  make server, make client etc etc
+```
+
+Once complete the instance will need to be rebooted (see known bugs).
 
 ## Known Bugs
  * Joining a server to the domain raises an error about NTP (even though its specified not to) and uploading SSH keys. The server will still be joined to the domain and after a reboot can be logged into.
