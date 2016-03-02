@@ -5,32 +5,39 @@
     owner: root
     group: root
     mode: 0644
+
 - name: Create a directory for storing the certificate database
   file: 
     path: /etc/pki/nssdb
     state: directory
+
 - name: Create folder for ipa
   file: 
     path: /var/run/ipa
     state: directory
+
 - name: Install prerequistes packages
   apt:
     name: software-properties-common
     state: present
+
 - name: Install the package signature verification key
   apt_key: 
     url: http://apt.numeezy.fr/numeezy.asc
     state: present
+
 - name: Install nscd
   apt: 
     update_cache: yes
     name: nscd
     state: present
+
 - name: Install FreeIPA client
   apt: 
     update_cache: yes
     name: freeipa-client
     state: present
+
 - name: Allow members of the admin groups to use sudo
   template:
     src: roles/client/template/80-freeipa-admins.j2
@@ -38,15 +45,18 @@
     owner: root
     group: root
     mode: 0660
+
 - name: Test for pam_mkhomedir.so
   shell: grep "pam_mkhomedir.so" /etc/pam.d/common-session
   register: test_grep
   ignore_errors: yes
+
 - name: Enable auto creation of LDAP user folders
   lineinfile: 
     dest: /etc/pam.d/common-session
     line: "session required pam_mkhomedir.so"
   when: test_grep.stdout == ""
+
 - name: Run the ipa-client-install command
   ignore_errors: yes
   command: ipa-client-install -U --domain={{ domain }} --server={{ server_hostname }} --realm={{ realm }} --password={{ principal_user_password }} --principal={{ principal_user }} --mkhomedir --no-dns-sshfp --hostname={{ inventory_hostname }} --no-ntp
