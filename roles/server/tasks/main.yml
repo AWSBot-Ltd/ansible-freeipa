@@ -19,5 +19,5 @@
   command: firewall-cmd --reload
 
 - name: Run the ipa-server-install command
-  command: ipa-server-install -U --setup-dns --hostname={{ inventory_hostname }} --domain={{ domain }} --realm={{ realm }} --ds-password={{ directory_manager_password }} --admin-password={{ principal_user_password }} -U --forwarder={{ dns_forwarder_1 }} --forwarder={{ dns_forwarder_2 }}
+  command: ipa-server-install -U --setup-dns --hostname={{ inventory_hostname }} --domain={{ domain }} --realm={{ realm }} --ds-password={{ directory_manager_password }} --admin-password={{ principal_user_password }} --forwarder={{ dns_forwarder_1 }} --forwarder={{ dns_forwarder_2 }}
 
