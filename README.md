@@ -21,7 +21,9 @@ or
 ```
 There is also a Makefile which can be used on a localhost (providing the group_vars have been set),
 ```
-  make server, make client etc etc
+  make server
+  make client
+  make ...
 ```
 
 Once complete the instance will need to be rebooted (see known bugs).
