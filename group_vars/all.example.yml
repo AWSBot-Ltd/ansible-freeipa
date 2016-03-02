@@ -4,3 +4,6 @@ domain: example.com
 realm: EXAMPLE.COM
 principal_user: admin
 principal_user_password: ASecretPasswor
+directory_manager_password: AnotherSecretPassword
+dns_forwarder_1: i.p.address.1
+dns_forwarder_2: i.p.address.2
