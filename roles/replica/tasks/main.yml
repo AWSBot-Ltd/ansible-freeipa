@@ -1,0 +1,23 @@
+- name: Install the ipa-server and ipa-server-dns packages
+  yum:
+    name: ipa-server
+    state: present
+    name: ipa-server-dns
+    state: present
+
+- name: Open the ports in the firewall
+  command: firewall-cmd --permanent --add-service ntp
+  command: firewall-cmd --permanent --add-service http
+  command: firewall-cmd --permanent --add-service https
+  command: firewall-cmd --permanent --add-service ldap
+  command: firewall-cmd --permanent --add-service ldaps
+  command: firewall-cmd --permanent --add-service kerberos
+  command: firewall-cmd --permanent --add-service kpasswd
+  command: firewall-cmd --permanent --add-service dns
+
+- name: Reload the firewall configuration
+  command: firewall-cmd --reload
+
+#- name: Run the ipa-server-install command
+#  command: ipa-server-install -U --setup-dns --hostname={{ inventory_hostname }} --domain={{ domain }} --realm={{ realm }} --ds-password={{ directory_manager_password }} --admin-password={{ principal_user_password }} --forwarder={{ dns_forwarder_1 }} --forwarder={{ dns_forwarder_2 }}
+

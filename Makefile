@@ -14,6 +14,9 @@ client:
 server:
 	ansible-playbook -i "${HOSTNAME}", -c local ipa-server.yml
 
+replica:
+	ansible-playbook -i "${HOSTNAME}", -c local ipa-replica.yml
+
 release:
 	@echo "Enter commit message:"
 	@read REPLY; \
